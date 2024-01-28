@@ -25,7 +25,7 @@ const Navbar = () => {
               to={"/"}
               className="btn btn-dark"
               onClick={() => {
-                context.setState({ username: "", email: "" });
+                context.setState({ ...context.state, logined: false });
               }}
             >
               LogOut
