@@ -19,9 +19,9 @@ export const PrivateRoute = ({ children }) => {
   const context = useContext(AuthContext);
   const navigate = useNavigate();
   useEffect(() => {
-    !context.state.username && navigate("/login");
+    !context.state.logined && navigate("/login");
   }, []);
-  return context.state.username && children;
+  return context.state.logined && children;
 };
 
 const router = createBrowserRouter([

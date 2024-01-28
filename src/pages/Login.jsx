@@ -5,30 +5,45 @@ const Login = () => {
   const context = useContext(AuthContext);
   const navigate = useNavigate();
 
-  const [passChecked, setPassChecked] = useState(true);
-  const [nameChecked, setNameChecked] = useState(true);
+  const [passChecked, setPassChecked] = useState(false);
+  const [nameChecked, setNameChecked] = useState(false);
 
   const [formData, setFormData] = useState({
     username: "",
     password: "",
   });
+
   const handleSubmit = (e) => {
     e.preventDefault();
+
     if (formData.password.trim() == "") {
-      setPassChecked(false);
-      setTimeout(() => setPassChecked(true), 2000);
+      setPassChecked("Enter password");
+      setTimeout(() => setPassChecked(false), 2000);
+    } else if (formData.password !== context.state.password) {
+      setPassChecked("Password does dont match");
+      setTimeout(() => setPassChecked(false), 2000);
     }
+
     if (formData.username.trim() == "") {
-      setNameChecked(false);
-      setTimeout(() => setNameChecked(true), 2000);
+      setNameChecked("Enter username");
+      setTimeout(() => setNameChecked(false), 2000);
+    } else if (formData.username !== context.state.username) {
+      setNameChecked("Username does dont match");
+      setTimeout(() => setNameChecked(false), 2000);
     }
 
     if (formData.password.trim() !== "" && formData.username.trim() !== "") {
-      context.setState({
-        username: formData.username,
-        password: formData.password,
-      });
-      navigate("/account");
+      if (
+        context.state.username == formData.username &&
+        context.state.password == formData.password
+      ) {
+        context.setState({
+          username: formData.username,
+          password: formData.password,
+          logined: true,
+        });
+        navigate("/account");
+      }
     }
   };
   return (
@@ -45,9 +60,7 @@ const Login = () => {
                 setFormData((prev) => ({ ...prev, username: e.target.value }))
               }
             />
-            {!nameChecked && (
-              <span className="text-danger">Enter username</span>
-            )}
+            {nameChecked && <span className="text-danger">{nameChecked}</span>}
           </div>
         </label>
         <label className="d-flex justify-content-between align-items-center mt-3">
@@ -60,9 +73,7 @@ const Login = () => {
                 setFormData((prev) => ({ ...prev, password: e.target.value }))
               }
             />
-            {!passChecked && (
-              <span className="text-danger">Enter password</span>
-            )}
+            {passChecked && <span className="text-danger">{passChecked}</span>}
           </div>
         </label>
         <div className="d-flex align-items-center mt-4 justify-content-center gap-3">

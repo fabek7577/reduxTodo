@@ -44,9 +44,10 @@ const Register = () => {
     ) {
       context.setState({
         username: formData.username,
+        email: formData.email,
         password: formData.password,
       });
-      navigate("/account");
+      navigate("/login");
     }
   };
   return (
