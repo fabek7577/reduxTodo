@@ -6,6 +6,7 @@ const AuthContextProvider = ({ children }) => {
   const [state, setState] = useState({
     username: "Farrux",
     password: 12345678,
+    logined: true,
   });
   return (
     <AuthContext.Provider value={{ state, setState }}>
