@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
-import pizzaImage from "../../../public/PizzaImage.png";
+import pizzaImage from "../../../public/pizzaImage.png";
 import { useDispatch } from "react-redux";
 import {
   selectPizza,
