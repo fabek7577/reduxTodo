@@ -14,6 +14,7 @@ import { RootLayout } from "./layout/RootLayout";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
 import { AuthContext } from "./context/AuthContext";
+import PizzaList from "./pages/Pizza/PizzaList";
 
 export const PrivateRoute = ({ children }) => {
   const context = useContext(AuthContext);
@@ -40,6 +41,10 @@ const router = createBrowserRouter([
       {
         path: "register",
         element: <Register />,
+      },
+      {
+        path: "pizza",
+        element: <PizzaList />,
       },
       {
         path: "account",

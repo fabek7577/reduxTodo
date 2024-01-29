@@ -12,9 +12,14 @@ const Navbar = () => {
         </h3>
         <div className="d-flex gap-2">
           {context.state.logined && (
-            <NavLink to="/account" className="btn btn-dark">
-              Account
-            </NavLink>
+            <>
+              <NavLink to="/account" className="btn btn-dark">
+                Account
+              </NavLink>
+              <NavLink to="/pizza" className="btn btn-dark">
+                Pizza
+              </NavLink>
+            </>
           )}
           {!context.state.logined ? (
             <NavLink to="/login" className="btn btn-dark">
