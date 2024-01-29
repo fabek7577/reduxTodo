@@ -1,11 +1,20 @@
-import React from "react";
-import "./Bill.scss";
+import React, { useEffect, useState } from "react";
+import styles from "./Bill.module.scss";
 import { useSelector } from "react-redux";
 const Bill = ({ setBill }) => {
   const { pizzaList } = useSelector((state) => state.pizza);
+  const [totalPrice, setTotalPrice] = useState(0);
+
+  useEffect(() => {
+    pizzaList.map((pizza) => {
+      if (pizza.selected) {
+        setTotalPrice((prev) => (prev += pizza.price * pizza.count));
+      }
+    });
+  }, []);
   return (
-    <div className="bill">
-      <h1>Bill</h1>
+    <div className={styles.bill}>
+      <h1 className="text-light my-3">Bill</h1>
       <table>
         <tbody>
           <tr>
@@ -33,12 +42,12 @@ const Bill = ({ setBill }) => {
           );
         })}
       </table>
-      <button
-        className="btn btn-primary px-5 mt-4"
-        onClick={() => setBill(false)}
-      >
-        Close
-      </button>
+      <div className={styles.buy}>
+        <button className="btn btn-primary px-5" onClick={() => setBill(false)}>
+          Buy
+        </button>
+        <span>Total price: {totalPrice}$</span>
+      </div>
     </div>
   );
 };
