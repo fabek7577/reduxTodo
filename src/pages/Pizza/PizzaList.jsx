@@ -21,7 +21,7 @@ const Pizza = () => {
         >
           Purchase
         </button>
-        {bill && <Bill setBill={setBill}/>}
+        {bill && <Bill setBill={setBill} />}
       </div>
     </div>
   );

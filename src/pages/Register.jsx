@@ -42,11 +42,15 @@ const Register = () => {
       formData.email.trim() !== "" &&
       regax > 0
     ) {
-      context.setState({
-        username: formData.username,
-        email: formData.email,
-        password: formData.password,
-      });
+      context.setState((prev) => [
+        ...prev,
+        {
+          username: formData.username,
+          email: formData.email,
+          password: formData.password,
+          logined: false,
+        },
+      ]);
       navigate("/login");
     }
   };
